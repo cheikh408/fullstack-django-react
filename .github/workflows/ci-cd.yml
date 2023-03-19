@@ -23,7 +23,7 @@ build-test :
 
 - name: Building containers
  run: |
-   docker-compose up -d --build
+   docker-compose up 
 
 - name: Running Tests
  run: |
