@@ -1,3 +1,10 @@
+name: Build, Test and Deploy Postagram
+on:
+ push:
+   branches: [ master ]
+
+
+
 build-test : 
  runs-on : ubuntu-latest 
  steps : 
