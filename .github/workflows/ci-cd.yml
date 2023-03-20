@@ -1,20 +1,27 @@
-name: Build, Test and Deploy Postagram backend
+name: Build, Test and Deploy App backend
 
 on:
   push:
     branches: [ master ]
 
+# Job pour construire, tester et déployer l'application backend
 jobs:
   build-test:
+    # Exécuter le job sur la dernière version d'Ubuntu
     runs-on: ubuntu-latest
     steps:
+    # Étape 1 : Récupérer le code source de l'application
     - uses: actions/checkout@v3
-    - name: Injecting environment vars
+    # Étape 2 : Injecter les variables d'environnement pour les tests
+    - name: Injecter les variables d'environnement pour les tests
       run: |
+        # Ajouter les secrets de test au fichier .env
         echo "${{ secrets.TEST_SECRETS }}" >> .env
-    - name: Building Docker containers
+    # Étape 3 : Construire et démarrer les conteneurs Docker nécessaires
+    - name: Construire et démarrer les conteneurs Docker
+     
       run: |
-        docker compose up 
+        docker-compose up 
         docker-compose logs
     - name: Running Tests inside Docker containers
       run: |
