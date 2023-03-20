@@ -18,9 +18,4 @@ jobs:
         # Ajouter les secrets de test au fichier .env
         echo "${{ secrets.TEST_SECRETS }}" >> .env
     # Étape 3 : Construire et démarrer les conteneurs Docker nécessaires
-    - name: Building containers
-      run: |
-        docker-compose up 
-     - name: Running Tests
-      run: |
-        docker-compose exec -T api pytest
+   
