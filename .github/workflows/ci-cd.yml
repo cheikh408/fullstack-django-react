@@ -16,12 +16,6 @@ jobs:
     - name: Injecter les variables d'environnement pour les tests
       run: |
         # Ajouter les secrets de test au fichier .env
-        echo "DATABASE_NAME=apidb
-      DATABASE_USER=tester
-      DATABASE_PASSWORD=wCh29&HE&T83
-      DATABASE_PORT=5432
-      ENV=DEV
-      DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
-                                " >> .env
+        echo "${{ secrets.TEST_SECRETS }}" >> .env
     # Étape 3 : Construire et démarrer les conteneurs Docker nécessaires
    
