@@ -1,30 +1,21 @@
-name: Build, Test and Deploy Postagram
+name: Build, Test and Deploy Postagram backend
+
 on:
- push:
-   branches: [ master ]
+  push:
+    branches: [ main ]
 
-
-
-build-test : 
- runs-on : ubuntu-latest 
- steps : 
- - uses : actions/checkout@v2 
- - name : Injecting env vars 
-   run : |
-     echo "
-            DATABASE_NAME=apidb
-            DATABASE_USER=tester
-            DATABASE_PASSWORD=wCh29&HE&T83
-            DATABASE_PORT=5432
-            ENV=DEV
-            DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
-            " >> .env
-
-
-- name: Building containers
- run: |
-   docker-compose up 
-
-- name: Running Tests
- run: |
-   docker-compose exec -T api pytest
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Injecting environment vars
+      run: |
+        echo "${{ secrets.TEST_SECRETS }}" >> .env
+    - name: Building Docker containers
+      run: |
+        docker-compose up -d --build
+        docker-compose logs
+    - name: Running Tests inside Docker containers
+      run: |
+        docker-compose exec -T api pytest
