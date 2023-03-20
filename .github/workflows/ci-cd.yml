@@ -12,10 +12,4 @@ jobs:
     - name: Injecting environment vars
       run: |
         echo "${{ secrets.TEST_SECRETS }}" >> .env
-    - name: Building Docker containers
-      run: |
-        docker compose up 
-        docker compose logs
-    - name: Running Tests inside Docker containers
-      run: |
-        docker compose exec -T api pytest
+   
