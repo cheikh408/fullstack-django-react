@@ -14,7 +14,7 @@ jobs:
         echo "${{ secrets.TEST_SECRETS }}" >> .env
     - name: Building Docker containers
       run: |
-        docker-compose up -d --build
+        docker-compose up 
         docker-compose logs
     - name: Running Tests inside Docker containers
       run: |
